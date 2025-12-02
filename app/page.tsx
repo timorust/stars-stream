@@ -39,23 +39,25 @@ export default function Home() {
           </div>
 
           <div className="pt-8">
-            <p>Trusted by thousaunds of users wordwide</p>
+            <p className="text-sm text-muted-foreground mb-4">
+              Trusted by thousaunds of users wordwide
+            </p>
 
-            <div>
+            <div className="flex justify-center items-center gap-8 text-muted-foreground">
               <div className="text-center">
-                <div>50K</div>
-                <div>Active User</div>
+                <div className="text-2xl font-bold text-foreground">50K</div>
+                <div className="text-sm">Active User</div>
               </div>
-              <div></div>
+              <div className="w-px h-8 bg-border"></div>
               <div className="text-center">
-                <div>1M+</div>
-                <div>Messages Sent</div>
+                <div className="text-2xl font-bold text-foreground">1M+</div>
+                <div className="text-sm">Messages Sent</div>
               </div>
 
-              <div></div>
+              <div className="w-px h-8 bg-border"></div>
               <div className="text-center">
-                <div>99.9%</div>
-                <div>Uptime</div>
+                <div className="text-2xl font-bold text-foreground">99.9%</div>
+                <div className="text-sm">Uptime</div>
               </div>
             </div>
           </div>
