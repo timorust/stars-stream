@@ -1,6 +1,8 @@
+import FeatureCard from "@/components/FeatureCard";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { SignedOut, SignInButton } from "@clerk/nextjs";
+import { MessageCircle, Shield, Users, Video, Zap } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -42,7 +44,6 @@ export default function Home() {
             <p className="text-sm text-muted-foreground mb-4">
               Trusted by thousaunds of users wordwide
             </p>
-
             <div className="flex justify-center items-center gap-8 text-muted-foreground">
               <div className="text-center">
                 <div className="text-2xl font-bold text-foreground">50K</div>
@@ -59,6 +60,55 @@ export default function Home() {
                 <div className="text-2xl font-bold text-foreground">99.9%</div>
                 <div className="text-sm">Uptime</div>
               </div>
+            </div>
+          </div>
+
+          <div className="w-full max-w-6xl">
+            <div className="w-full flex items-center mb-16">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+
+              <div className="px-6">
+                <div className="w-2 h-2 rounded-full bg-primary/60"></div>
+              </div>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+            </div>
+
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+                Everything you need to stay connected
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Powerful features designed for seamless cimmunication, whether
+                you&apos;re chatting with friends or collaborating with teams.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+              <FeatureCard
+                icon={MessageCircle}
+                title="Instant Messaging"
+                description="Lighting-fast messages with real-time delivery. Chat with friends and colleagues seamlessly."
+              />
+              <FeatureCard
+                icon={Video}
+                title="HD Video Calls"
+                description="Crystal-clear video calls with one click Perfect quality for personal chats and team meetings."
+              />
+              <FeatureCard
+                icon={Shield}
+                title="Privacy First"
+                description="End-to-end encryption keeps your conversation private. Your data belongs to you, always."
+              />
+              <FeatureCard
+                icon={Users}
+                title="Group Chats"
+                description="Create groups with friends, family, or colleagues. Manage conversations with advanced controls."
+              />
+              <FeatureCard
+                icon={Zap}
+                title="Lightning Fast"
+                description="Optimized for speed and perfomance. Works seamlessly across all your devices with instant sync."
+              />
             </div>
           </div>
         </div>
