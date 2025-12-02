@@ -1,12 +1,66 @@
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
+import { SignedOut, SignInButton } from "@clerk/nextjs";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="">
       <Header />
-      <h1>Hello TIMIK</h1>
+
+      <main className="flex-1 flex flex-col items-center px-4 py-16 sm:px-6 text-center gap-20">
+        <div className="max-w-4xl space-y-8 relative">
+          <div className="absolute inset-0 -z-10 bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-20 dark:via-indigo-950/20 dark:to-purple-950/20 rounded-3xl blur-3xl scale-150 opacity-60">
+            hi
+          </div>
+
+          <div>
+            {" "}
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-light bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400">
+              Hi Timik... connect instantly... <br />{" "}
+              <span className="bg-clip-text text-transparent bg-linear-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
+                Chat smarter...
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              The modern messaging platform that combines lightning-fast chat
+              and crystal-clear video calls in one seamless experience.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button size="lg" className="text-lg px-8 py-6 h-auto">
+                  Start Chatting Free
+                </Button>
+              </SignInButton>
+            </SignedOut>
+          </div>
+
+          <div className="pt-8">
+            <p>Trusted by thousaunds of users wordwide</p>
+
+            <div>
+              <div className="text-center">
+                <div>50K</div>
+                <div>Active User</div>
+              </div>
+              <div></div>
+              <div className="text-center">
+                <div>1M+</div>
+                <div>Messages Sent</div>
+              </div>
+
+              <div></div>
+              <div className="text-center">
+                <div>99.9%</div>
+                <div>Uptime</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
