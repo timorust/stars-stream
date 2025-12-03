@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { SignedOut, SignInButton } from "@clerk/nextjs";
 import { MessageCircle, Shield, Users, Video, Zap } from "lucide-react";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -12,9 +11,7 @@ export default function Home() {
 
       <main className="flex-1 flex flex-col items-center px-4 py-16 sm:px-6 text-center gap-20">
         <div className="max-w-4xl space-y-8 relative">
-          <div className="absolute inset-0 -z-10 bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-20 dark:via-indigo-950/20 dark:to-purple-950/20 rounded-3xl blur-3xl scale-150 opacity-60">
-            hi
-          </div>
+          <div className="absolute inset-0 -z-10 bg-linear-to-br from-blue-500 via-indigo-500 to-white dark:from-blue-20 dark:via-indigo-950/20 dark:to-purple-950/20 rounded-3xl blur-3xl scale-150 opacity-60"></div>
 
           <div>
             {" "}
@@ -111,8 +108,92 @@ export default function Home() {
               />
             </div>
           </div>
+
+          <div className="w-full max-w-4xl">
+            <div className="rounded-2xl border bg-linear-to-br from-primary/5 to-primary/10 p-12 text-center">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Ready to transform your conversations?
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Join thousands of users who&apos;ve already discovered a better
+                way to communicate. Start your journey with Dream Stream today -
+                it&apos;s completely free.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <Button size="lg" className="text-lg px-8 py-6 h-auto">
+                      Get Started Free
+                    </Button>
+                  </SignInButton>
+                </SignedOut>
+              </div>
+
+              <div className="flex justify-center flex-col sm:flex-row items-center gap-6 mt-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  No credit card required
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  Free forever plan
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  Setup in 30 seconds
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
+
+      <footer className="border-t bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div>
+              <span className="text-xl font-bold tracking-tight">
+                Dream Stream
+              </span>
+              <p className="text-sm text-muted-foreground mt-1">
+                The future of communication
+              </p>
+            </div>
+
+            <div className="flex items-center gap-8">
+              <a
+                href="#"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="#"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Support
+              </a>
+            </div>
+          </div>
+
+          <div className="border-t mt-8 pt-6 text-center">
+            <p className="text-xs text-muted-foreground">
+              Only through our mutual completion can we reach true wholeness.
+              You will never change on your own; if you truly want to change, it
+              can only happen through connection—by integrating with others. And
+              when you are connected to them, you will feel a new form emerging.
+              Therefore, we shouldn&apos;t compare ourselves to one another, but
+              simply strive to unite.{" "}
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
