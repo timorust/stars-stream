@@ -35,3 +35,24 @@ export const upsertUser = mutation({
     return await ctx.db.insert("users", { userId, name, email, imageUrl });
   },
 });
+
+// Search users by name or email
+
+export const searchUsers = query({
+  args: { searchTerm: v.string() },
+  handler: async (ctx, { searchTerm }) => {
+    if (!searchTerm.trim()) return [];
+
+    const nolmalizedSearch = searchTerm.toLocaleLowerCase().trim();
+
+    // Get all users and filter them by name or email containing the search term
+    const allUsers = await ctx.db.query("users").collect();
+    return allUsers
+      .filter(
+        (user) =>
+          user.name.toLocaleLowerCase().includes(nolmalizedSearch) ||
+          user.email.toLocaleLowerCase().includes(nolmalizedSearch)
+      )
+      .slice(0, 20);
+  },
+});
