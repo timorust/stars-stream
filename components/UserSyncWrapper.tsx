@@ -3,19 +3,66 @@
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
-import { useState } from "react";
-import LoadingSpinner from "./LoadingSpinner";
+import { useCallback, useState } from "react";
+import { LoadingSpinner } from "./LoadingSpinner";
+import streamClient from "@/lib/stream";
+import { createToken } from "@/actions/createToken";
 
 function UserSyncWrapper({ children }: { children: React.ReactNode }) {
   const { user, isLoaded: isUserLoaded } = useUser();
-  const { isLoading, setIsLoading } = useState(true);
-  const { error, setError } = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Convex matation to sync user
   const createOrUpdateUser = useMutation(api.users.upsertUser);
 
-  // Loading state
+  const syncUser = useCallback(async () => {
+    if (!user?.id) return;
 
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const tokenProvider = async () => {
+        if (!user?.id) throw new Error("User is not authenticated");
+        const token = await createToken(user.id);
+        return token;
+      };
+
+      // Save user to Convex
+      await createOrUpdateUser({
+        userId: user.id,
+        name:
+          user.fullName ||
+          user.firstName ||
+          user.emailAddresses[0]?.emailAddress ||
+          "Unknown User",
+        email: user.emailAddresses[0]?.emailAddress || "",
+        imageUrl: user.imageUrl || "",
+      });
+
+      // Conect user to Stream
+      await streamClient.connectUser(
+        {
+          id: user.id,
+          name:
+            user.fullName ||
+            user.firstName ||
+            user.emailAddresses[0]?.emailAddress ||
+            "Unknown User",
+          image: user.imageUrl || "",
+        },
+        tokenProvider
+      );
+    } catch (err) {
+      console.error("Failed to sync user:", err);
+      setError(err instanceof Error ? err.message : "Failed to sync user");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [createOrUpdateUser, user]);
+
+  // Loading state
   if (!isUserLoaded || isLoading)
     return (
       <LoadingSpinner
