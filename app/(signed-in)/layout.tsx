@@ -2,8 +2,8 @@
 
 import UserSyncWrapper from "@/components/UserSyncWrapper";
 
-function layout({ children }: { children: React.ReactNode }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return <UserSyncWrapper>{children}</UserSyncWrapper>;
 }
 
-export default layout;
+export default Layout;
