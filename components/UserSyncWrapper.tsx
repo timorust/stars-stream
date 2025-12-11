@@ -78,6 +78,11 @@ function UserSyncWrapper({ children }: { children: React.ReactNode }) {
       disconnectUser();
       setIsLoading(false);
     }
+
+    // Cleanup function
+    return () => {
+      if (user) disconnectUser();
+    };
   }, [user, isUserLoaded, syncUser, disconnectUser]);
 
   // Loading state
