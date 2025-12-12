@@ -13,9 +13,21 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { ChannelList } from "stream-chat-react";
+import { ChannelFilters, ChannelSort } from "stream-chat";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useUser();
+
+  const filters: ChannelFilters = {
+    members: { $in: [user?.id as string] },
+    type: { $in: ["messaging", "team"] },
+  };
+
+  const options = { presence: true, state: true };
+  const sort: ChannelSort = {
+    last_message_at: -1,
+  };
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
@@ -43,6 +55,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <Button className="w-full" variant="outline">
               Start New Chat
             </Button>
+            <ChannelList />
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
