@@ -23,6 +23,11 @@ function UserSearch({
     (searchUser) => searchUser.userId !== user?.id
   );
 
+  const handleSelectUser = (user: (typeof searchResults)[0]) => {
+    onSelectUser?.(user);
+    setSearchTerm("");
+  };
+
   return <div>UserSearch</div>;
 }
 
