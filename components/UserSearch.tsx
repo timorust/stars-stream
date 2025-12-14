@@ -2,7 +2,10 @@
 
 import { Doc } from "@/convex/_generated/dataModel";
 import { useUserSearch } from "@/hooks/useUserSearch";
+import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
+import { Search } from "lucide-react";
+import { Input } from "./ui/input";
 
 function UserSearch({
   onSelectUser,
@@ -28,7 +31,23 @@ function UserSearch({
     setSearchTerm("");
   };
 
-  return <div>UserSearch</div>;
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
+  return (
+    <div className={cn("w-full max-w-2xl mx-auto", className)}>
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder={placeholder}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="pl-10 pr-10 h-12 text-base"
+        />
+      </div>
+    </div>
+  );
 }
 
 export default UserSearch;
