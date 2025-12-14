@@ -18,6 +18,11 @@ function UserSearch({
 
   const { user } = useUser();
 
+  // Filter out the current logged-in user from search result
+  const filteredResults = searchResults.filter(
+    (searchUser) => searchUser.userId !== user?.id
+  );
+
   return <div>UserSearch</div>;
 }
 
