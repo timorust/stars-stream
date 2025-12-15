@@ -45,6 +45,21 @@ export function NewChatDialog({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const handleCreateChat = async () => {
+    const totalMembers = selectedUsers.length + 1;
+    const isGroupChat = totalMembers > 2;
+
+    const channel = await createNewChat({
+      members: [
+        user?.id as string,
+        ...selectedUsers.map((user) => user.userId),
+      ],
+      createdBy: user?.id as string,
+      groupName: isGroupChat ? groupName.trim() || undefined : undefined,
+    });
+
+    setActiveChannel(channel);
+  };
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
