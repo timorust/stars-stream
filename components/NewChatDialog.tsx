@@ -132,7 +132,7 @@ export function NewChatDialog({ children }: { children: React.ReactNode }) {
                     htmlFor="groupName"
                     className="text-sm font-medium text-foreground"
                   >
-                    Group Name (Optionak)
+                    Group Name (Optional)
                   </label>
 
                   <Input
