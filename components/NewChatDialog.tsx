@@ -61,6 +61,11 @@ export function NewChatDialog({ children }: { children: React.ReactNode }) {
     });
 
     setActiveChannel(channel);
+
+    // Reset form and close dialog
+    setSelectedUsers([]);
+    setGroupName("");
+    setOpen(false);
   };
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
