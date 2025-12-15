@@ -10,6 +10,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -18,6 +19,7 @@ import UserSearch from "./UserSearch";
 import Image from "next/image";
 import { XIcon } from "lucide-react";
 import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 export function NewChatDialog({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -145,6 +147,22 @@ export function NewChatDialog({ children }: { children: React.ReactNode }) {
             </div>
           )}
         </div>
+
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button
+            disabled={selectedUsers.length === 0}
+            onClick={handleCreateChat}
+          >
+            {selectedUsers.length > 1
+              ? `Create Group Chat (${selectedUsers.length + 1} members)`
+              : selectedUsers.length === 1
+                ? "Start Chat"
+                : "Create Chat"}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
