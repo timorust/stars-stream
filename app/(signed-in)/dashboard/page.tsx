@@ -56,12 +56,12 @@ function Dashboard() {
                   Leave Chat
                 </Button>
               </div>
+            </div>
 
-              <MessageList />
+            <MessageList />
 
-              <div className="sticky bottom-0 w-full">
-                <MessageInput />
-              </div>
+            <div className="sticky bottom-0 w-full">
+              <MessageInput />
             </div>
           </Window>
           <Thread />
