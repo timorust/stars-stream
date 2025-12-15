@@ -24,7 +24,9 @@ function UserSearch({
   const { user } = useUser();
 
   // Filter out the current logged-in user from search result
-  const filteredResults = searchResults;
+  const filteredResults = searchResults.filter(
+    (searchUser) => searchUser.userId !== user?.id
+  );
 
   const handleSelectUser = (user: (typeof searchResults)[0]) => {
     onSelectUser?.(user);
