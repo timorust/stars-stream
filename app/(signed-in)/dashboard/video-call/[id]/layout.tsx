@@ -84,7 +84,11 @@ function Layout({ children }: { children: React.ReactNode }) {
     };
     joinCall();
 
-    //
+    // cleanup function
+    return () => {
+      if (StreamCall && StreamCall.state.callingState === CallingState.JOINED)
+        StreamCall.leave().catch(console.error);
+    };
   }, [id, client]);
 
   if (!client) return <div>Loading ...client</div>;
