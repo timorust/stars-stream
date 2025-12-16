@@ -26,8 +26,24 @@ function Dashboard() {
     console.log("Calling...");
   };
 
-  const handleLeaveChat = () => {
-    console.log("Leaving chat...");
+  const handleLeaveChat = async () => {
+    if (!channel || !user?.id) {
+      console.log("No active channel or user.");
+      return;
+    }
+
+    const confirm = window.confirm("Ar you sure you want to leave the chat?");
+    if (!confirm) return;
+
+    try {
+      await channel.removeMembers([user.id]);
+
+      setActiveChannel(undefined);
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Error leaving chat:=>", error);
+    }
   };
 
   return (
