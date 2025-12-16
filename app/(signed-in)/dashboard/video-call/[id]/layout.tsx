@@ -1,5 +1,6 @@
 "use client";
 import { createToken } from "@/actions/createToken";
+import { InLineSpinner } from "@/components/LoadingSpinner";
 import { StatusCard } from "@/components/StatusCard";
 import { useUser } from "@clerk/nextjs";
 import {
@@ -115,7 +116,17 @@ function Layout({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!client) return <div>Loading ...client</div>;
+  if (!client) {
+    return (
+      <StatusCard
+        title="Initializing client..."
+        description="Setting up video call connection..."
+        className="min-h-screen bg-blue-50"
+      >
+        <InLineSpinner size="lg" />
+      </StatusCard>
+    );
+  }
   if (!call) return <div>Loading ...call</div>;
 
   return (
