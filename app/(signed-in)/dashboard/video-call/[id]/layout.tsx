@@ -66,6 +66,27 @@ function Layout({ children }: { children: React.ReactNode }) {
     };
   }, [streamUser, tokenProvider]);
 
+  useEffect(() => {
+    if (!client || !id) return;
+
+    setError(null);
+
+    const StreamCall = client.call("default", id as string);
+
+    const joinCall = async () => {
+      try {
+      } catch (error) {
+        console.error("Failed to join call:=>", error);
+        setError(
+          error instanceof Error ? error.message : "Failed to join call"
+        );
+      }
+    };
+    joinCall();
+
+    //
+  }, [id, client]);
+
   if (!client) return <div>Loading ...client</div>;
   if (!call) return <div>Loading ...call</div>;
 
