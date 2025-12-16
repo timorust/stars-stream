@@ -14,7 +14,7 @@ import {
   useCallStateHooks,
   type User,
 } from "@stream-io/video-react-sdk";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Video } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -127,7 +127,20 @@ function Layout({ children }: { children: React.ReactNode }) {
       </StatusCard>
     );
   }
-  if (!call) return <div>Loading ...call</div>;
+  if (!call)
+    return (
+      <StatusCard title="Joining call..." className="min-h-screen bg-green-50">
+        <div className="animate-bounce h-16 w-16 mx-auto">
+          <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center">
+            <Video className="w-8 h-8 text-green-600" />
+          </div>
+        </div>
+
+        <div className="text-green-600 font-mono text-sm bg-green-100 px-3 py-1 rounded-full inline-block">
+          Call ID: {id}
+        </div>
+      </StatusCard>
+    );
 
   return (
     <StreamVideo client={client}>
