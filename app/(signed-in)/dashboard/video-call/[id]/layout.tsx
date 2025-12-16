@@ -1,5 +1,6 @@
 "use client";
 import { createToken } from "@/actions/createToken";
+import { StatusCard } from "@/components/StatusCard";
 import { useUser } from "@clerk/nextjs";
 import {
   Call,
@@ -12,6 +13,7 @@ import {
   useCallStateHooks,
   type User,
 } from "@stream-io/video-react-sdk";
+import { AlertTriangle } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -90,6 +92,28 @@ function Layout({ children }: { children: React.ReactNode }) {
         StreamCall.leave().catch(console.error);
     };
   }, [id, client]);
+
+  if (error) {
+    return (
+      <StatusCard
+        title="Call Error"
+        description={error}
+        className="min-h-screen bg-red-50"
+        action={
+          <button
+            onClick={() => window.location.reload()}
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            Retry
+          </button>
+        }
+      >
+        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto">
+          <AlertTriangle className="w-8 h-8 text-red-600" />
+        </div>
+      </StatusCard>
+    );
+  }
 
   if (!client) return <div>Loading ...client</div>;
   if (!call) return <div>Loading ...call</div>;
