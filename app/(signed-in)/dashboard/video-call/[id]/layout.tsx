@@ -76,10 +76,12 @@ function Layout({ children }: { children: React.ReactNode }) {
 
     setError(null);
 
-    const StreamCall = client.call("default", id as string);
+    const streamCall = client.call("default", id as string);
 
     const joinCall = async () => {
       try {
+        await streamCall.join({ create: true });
+        setCall(streamCall);
       } catch (error) {
         console.error("Failed to join call:=>", error);
         setError(
@@ -91,8 +93,8 @@ function Layout({ children }: { children: React.ReactNode }) {
 
     // cleanup function
     return () => {
-      if (StreamCall && StreamCall.state.callingState === CallingState.JOINED)
-        StreamCall.leave().catch(console.error);
+      if (streamCall && streamCall.state.callingState === CallingState.JOINED)
+        streamCall.leave().catch(console.error);
     };
   }, [id, client]);
 
